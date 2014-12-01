@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Xebia TV</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name_html"><![CDATA[Xebia<sup><small><font color=\"#06a99c\">TV</font></small></sup>]]></string>
+    <string name="video_thumbnail">Video thumbnail</string>
+    <string name="description_load_error">Impossible de charger la description</string>
+    <string name="unknow_error">Une erreur est survenue</string>
+</resources>
