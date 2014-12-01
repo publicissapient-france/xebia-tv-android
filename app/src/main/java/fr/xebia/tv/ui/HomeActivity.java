@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.crashlytics.android.Crashlytics;
 import fr.xebia.tv.R;
 import fr.xebia.tv.bus.PlayVideoEvent;
 import fr.xebia.tv.model.player.Video;
@@ -16,6 +17,7 @@ public class HomeActivity extends ActionBarActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
         setContentView(R.layout.home_activity);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
