@@ -7,13 +7,14 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/video_player_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/video_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
         <ProgressBar
             android:id="@+id/video_progress"
@@ -25,10 +26,10 @@
     </FrameLayout>
 
     <ScrollView
+        android:id="@+id/details_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:id="@+id/details_container">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"

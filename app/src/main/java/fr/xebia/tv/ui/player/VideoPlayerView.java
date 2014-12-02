@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,6 +35,7 @@ import static com.google.android.youtube.player.YouTubePlayer.Provider;
 
 public class VideoPlayerView extends LinearLayout implements OnInitializedListener, OnFullscreenListener {
 
+    @InjectView(R.id.video_player_container) ViewGroup videoPlayerContainer;
     @InjectView(R.id.video_player) YouTubePlayerView youTubePlayerView;
     @InjectView(R.id.video_progress) ProgressBar videoProgress;
     @InjectView(R.id.details_container) ViewGroup detailsContainer;
@@ -129,7 +129,7 @@ public class VideoPlayerView extends LinearLayout implements OnInitializedListen
     @Override
     public void onInitializationFailure(Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         videoProgress.setVisibility(GONE);
-        if(youTubeInitializationResult.isUserRecoverableError()){
+        if (youTubeInitializationResult.isUserRecoverableError()) {
             youTubeInitializationResult.getErrorDialog(((Activity) getContext()), VideoPlayerActivity.REQUEST_YOUTUBE_ERROR_RECOVERY);
         } else {
             Toast.makeText(getContext(), R.string.unknow_error, Toast.LENGTH_LONG).show();
@@ -138,12 +138,12 @@ public class VideoPlayerView extends LinearLayout implements OnInitializedListen
     }
 
     private void doLayout() {
-        FrameLayout.LayoutParams playerParams = (FrameLayout.LayoutParams) youTubePlayerView.getLayoutParams();
+        LinearLayout.LayoutParams videoPlayerContainerParams = (LinearLayout.LayoutParams) videoPlayerContainer.getLayoutParams();
         if (fullscreen) {
             // When in fullscreen, the visibility of all other views than the player should be set to
             // GONE and the player should be laid out across the whole screen.
-            playerParams.width = LayoutParams.MATCH_PARENT;
-            playerParams.height = LayoutParams.MATCH_PARENT;
+            videoPlayerContainerParams.width = LayoutParams.MATCH_PARENT;
+            videoPlayerContainerParams.height = LayoutParams.MATCH_PARENT;
 
             detailsContainer.setVisibility(View.GONE);
         } else {
@@ -151,8 +151,8 @@ public class VideoPlayerView extends LinearLayout implements OnInitializedListen
             // portrait, horizontally stacked in landscape).
             detailsContainer.setVisibility(View.VISIBLE);
             ViewGroup.LayoutParams otherViewsParams = detailsContainer.getLayoutParams();
-            playerParams.width = otherViewsParams.width = MATCH_PARENT;
-            playerParams.height = WRAP_CONTENT;
+            videoPlayerContainerParams.width = otherViewsParams.width = MATCH_PARENT;
+            videoPlayerContainerParams.height = WRAP_CONTENT;
             otherViewsParams.height = MATCH_PARENT;
         }
     }

@@ -21,7 +21,7 @@ public class VideoPlayerActivity extends YouTubeBaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.video_player_activity);
+        setContentView(R.layout.video_player_view);
         Video video = getIntent().getParcelableExtra(EXTRA_VIDEO);
         videoPlayerPresenter = new VideoPlayerPresenter(video, new VideosProvider(getXebiaTvApi()), savedInstanceState);
         ((VideoPlayerView) findViewById(R.id.video_player_view))
