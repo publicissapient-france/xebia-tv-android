@@ -63,4 +63,8 @@ public class VideosPresenter extends Presenter<VideosView> {
         }
     };
 
+    public void onRetryLoadVideos() {
+        showProgress();
+        refreshVideos();
+    }
 }

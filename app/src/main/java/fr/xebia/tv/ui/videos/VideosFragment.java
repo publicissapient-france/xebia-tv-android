@@ -17,7 +17,7 @@ public class VideosFragment extends Fragment {
     private VideosView videosView;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        videosView = (VideosView) inflater.inflate(R.layout.videos_fragment, container, false);
+        videosView = (VideosView) inflater.inflate(R.layout.videos_view, container, false);
         videosView.setupPresenter(new VideosPresenter(new VideosProvider(getXebiaTvApi()), savedInstanceState));
         return videosView;
     }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.etsy.android.grid.StaggeredGridView;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import fr.xebia.tv.R;
 import fr.xebia.tv.model.youtube.YoutubeVideoItem;
@@ -21,6 +24,8 @@ public class VideosView extends FrameLayout implements SwipeRefreshLayout.OnRefr
 
     @InjectView(R.id.swipeable_container) SwipeRefreshLayout swipeableContainer;
     @InjectView(R.id.videos_list_grid) StaggeredGridView gridView;
+    @InjectView(R.id.error_container) ViewGroup errorContainer;
+    @InjectView(R.id.error_message) TextView errorMessage;
 
     VideosAdapter adapter;
     VideosPresenter presenter;
@@ -60,6 +65,10 @@ public class VideosView extends FrameLayout implements SwipeRefreshLayout.OnRefr
         presenter.onVideoSelected(position);
     }
 
+    @OnClick(R.id.retry_btn) public void onRetryBtnClicked() {
+        presenter.onRetryLoadVideos();
+    }
+
 
     public void showVideos(List<YoutubeVideoItem> youtubeVideoItems) {
         adapter = new VideosAdapter(getContext(), youtubeVideoItems);
@@ -70,6 +79,7 @@ public class VideosView extends FrameLayout implements SwipeRefreshLayout.OnRefr
 
 
     public void showProgress() {
+        errorContainer.setVisibility(GONE);
         gridView.setVisibility(GONE);
         new Handler().post(new Runnable() {
             @Override
@@ -80,11 +90,17 @@ public class VideosView extends FrameLayout implements SwipeRefreshLayout.OnRefr
     }
 
     public void showEmpty() {
-
+        swipeableContainer.setRefreshing(false);
+        gridView.setVisibility(GONE);
+        errorContainer.setVisibility(VISIBLE);
+        errorMessage.setText(R.string.no_videos);
     }
 
     public void showError() {
-
+        swipeableContainer.setRefreshing(false);
+        gridView.setVisibility(GONE);
+        errorContainer.setVisibility(VISIBLE);
+        errorMessage.setText(R.string.videos_load_failed);
     }
 
     @Override public void onRefresh() {
