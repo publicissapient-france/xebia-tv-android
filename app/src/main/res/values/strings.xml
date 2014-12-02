@@ -10,5 +10,5 @@
     <string name="unknow_error">Une erreur est survenue</string>
     <string name="retry">Réessayer</string>
     <string name="no_videos">Pas de vidéos pour le moment</string>
-    <string name="videos_load_failed">Le chargement des vidéos à échoué</string>
+    <string name="videos_load_failed">Le chargement des vidéos a échoué</string>
 </resources>
